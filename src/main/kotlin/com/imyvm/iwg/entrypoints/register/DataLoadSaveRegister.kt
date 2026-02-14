@@ -25,4 +25,12 @@ private fun dataSave() {
             ImyvmWorldGeo.logger.error("Failed to save region database: ${e.message}", e)
         }
     }
+
+    ServerLifecycleEvents.AFTER_SAVE.register { _, _, _ ->
+        try {
+            RegionDatabase.save()
+        } catch (e: Exception) {
+            ImyvmWorldGeo.logger.error("Failed to save region database: ${e.message}", e)
+        }
+    }
 }
